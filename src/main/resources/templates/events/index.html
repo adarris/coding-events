@@ -5,7 +5,9 @@
     <title></title>
 </head>
 <body>
-    <h3>Events:</h3>
-        <li th:each ="event : ${events}" th:text = "${event}"></li>
+    <h1>All Events:</h1>
+
+    <p th:unless="${events} and ${events.size()}">No events!</p>
+    <li th:each ="event : ${events}" th:text = "${event}"></li>
 </body>
 </html>
