@@ -6,9 +6,21 @@
 <header th:replace="fragments :: header"></header>
 
 <form method="post">
-    <input type="text" name="eventName">
-    <input type="submit" value="Create">
-    <td th:replace="fragments :: address"></td>
+    <div class="form-group">
+        <label>Name
+            <input type="text" name="eventName">
+        </label>
+    </div>
+    <div class="form-group">
+        <label>Description
+            <input type="text" name="eventDescription">
+        </label>
+    </div>
+    <div class="form-group">
+            <input type="submit" value="Create">
+    </div>
+
+<!--    <td th:replace="fragments :: address"></td>-->
 </form>
 
 

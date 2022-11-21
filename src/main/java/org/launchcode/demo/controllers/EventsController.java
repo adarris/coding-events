@@ -1,5 +1,6 @@
 package org.launchcode.demo.controllers;
 
+import org.launchcode.demo.models.Event;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,28 +17,31 @@ import java.util.List;
 @RequestMapping("events")
 public class EventsController {
 
-    private static HashMap<String, String> events = new HashMap<>();
+    private static List<Event> events = new ArrayList<>();
     @GetMapping
-    public String displayEvents(Model model){
+    public String displayAllEvents(Model model){
 //        model.addAttribute("events", events);
 //        return "events/index";
-        events.put("Code code revolution", "Standing desks, games, and coders");
-        events.put("Rihanna meets STL Coders", "Come get under her umbrella");
-        events.put("Another corny event title", "you get it.. we're coding");
-
+//        events.put("Code code revolution", "Standing desks, games, and coders");
+//        events.put("Rihanna meets STL Coders", "Come get under her umbrella");
+//        events.put("Another corny event title", "you get it.. we're coding");
+        model.addAttribute("title", "All Events");
         model.addAttribute("events", events);
 
         return "events/index";
     }
     @GetMapping("create")
-    public String renderCreateEvent(){
+    public String displayCreateEventForm(Model model){
+//        events.add(new Event(eventName));
+        model.addAttribute("title", "Create Event");
+
         return "events/create";
     }
 
-//    @PostMapping("create")
-//    public String createEvent(@RequestParam String eventName){
-//        events.put(eventName);
-//
-//        return "redirect:";
-//    }
+    @PostMapping("create")
+    public String processCreateEvent(@RequestParam String eventName, @RequestParam String eventDescription){
+        events.add(new Event(eventName, eventDescription));
+
+        return "redirect:";
+    }
 }
