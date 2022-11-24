@@ -24,7 +24,9 @@ public class EventData {
         events.put(event.getId(), event);
     }
     // remove an event
-    public static void remove( int id){
-        events.remove(id);
+    public static void remove(Integer id) {
+        if (events.containsKey(id)) {
+            events.remove(id);
+        }
     }
 }

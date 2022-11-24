@@ -3,11 +3,8 @@ package org.launchcode.demo.controllers;
 import org.launchcode.demo.data.EventData;
 import org.launchcode.demo.models.Event;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 import java.util.ArrayList;
@@ -40,9 +37,8 @@ public class EventsController {
     }
 
     @PostMapping("create")
-    public String processCreateEvent(@RequestParam String eventName, @RequestParam String eventDescription){
-        EventData.add(new Event(eventName, eventDescription));
-
+    public String processCreateEventForm(@ModelAttribute Event newEvent) {
+        EventData.add(newEvent);
         return "redirect:";
     }
 
