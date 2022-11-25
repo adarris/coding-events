@@ -2,6 +2,7 @@ package org.launchcode.demo.controllers;
 
 import org.launchcode.demo.data.EventData;
 import org.launchcode.demo.models.Event;
+import org.launchcode.demo.models.EventType;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
@@ -35,6 +36,7 @@ public class EventsController {
 //        events.add(new Event(eventName));
         model.addAttribute("title", "Create Event");
         model.addAttribute("event", new Event());
+        model.addAttribute("types", EventType.values());
 
         return "events/create";
     }
