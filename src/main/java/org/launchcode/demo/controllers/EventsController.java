@@ -3,10 +3,12 @@ package org.launchcode.demo.controllers;
 import org.launchcode.demo.data.EventData;
 import org.launchcode.demo.models.Event;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
 
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -32,12 +34,18 @@ public class EventsController {
     public String displayCreateEventForm(Model model){
 //        events.add(new Event(eventName));
         model.addAttribute("title", "Create Event");
+        model.addAttribute("event", new Event());
 
         return "events/create";
     }
 
     @PostMapping("create")
-    public String processCreateEventForm(@ModelAttribute Event newEvent) {
+    public String processCreateEventForm(@ModelAttribute @Valid Event newEvent, Errors errors, Model model) {
+        if (errors.hasErrors()){
+            model.addAttribute("title", "Create Event");
+            //model.addAttribute("errorMsg", "Bad data!");
+            return "events/create";
+        }
         EventData.add(newEvent);
         return "redirect:";
     }
