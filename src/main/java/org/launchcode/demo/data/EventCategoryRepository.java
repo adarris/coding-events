@@ -1,4 +1,9 @@
 package org.launchcode.demo.data;
 
-public class EventCategoryRepository extends CrudRepository {
+import org.launchcode.demo.models.EventCategory;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface EventCategoryRepository extends CrudRepository<EventCategory, Integer> {
+
 }

@@ -1,31 +1,23 @@
 package org.launchcode.demo.models;
-
-import com.fasterxml.jackson.annotation.JsonTypeId;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
-
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.validation.constraints.Size;
 import java.util.Objects;
 
-@Entity
-public class EventCategory {
-    @Id
-    @GeneratedValue
-    private int id;
 
-    @Size(min=3, message="Name must be more than 3 characters")
+@Entity
+public class EventCategory extends AbstractEntity{
+
+
+    @Size(min=3, message="Name must be at least 3 characters long")
     private String name;
 
-    public EventCategory(String name){
+    public EventCategory(@Size(min = 3, message = "Name must be at least 3 characters long") String name) {
         this.name = name;
     }
 
-    public EventCategory() {
-    }
-
-    public int getId() {
-        return id;
-    }
+    public EventCategory() {}
 
     public String getName() {
         return name;
@@ -35,21 +27,9 @@ public class EventCategory {
         this.name = name;
     }
 
-    @Override
+       @Override
     public String toString() {
         return name;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        EventCategory that = (EventCategory) o;
-        return id == that.id && Objects.equals(name, that.name);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name);
-    }
 }
